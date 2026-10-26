@@ -1,6 +1,6 @@
 import { analizarCedula } from "./cedula";
 import { obtenerProvincia } from "./provincias";
-import { aDigitos, normalizar, sumaPonderada } from "./utils";
+import { aDigitos, modulo11, normalizar } from "./utils";
 
 export type TipoRuc = "natural" | "privada" | "publica";
 
@@ -24,15 +24,8 @@ export interface OpcionesRuc {
   verificarDigitoSociedades?: boolean;
 }
 
-const COEF_PRIVADA = [4, 3, 2, 7, 6, 5, 4, 3, 2];
-const COEF_PUBLICA = [3, 2, 7, 6, 5, 4, 3, 2];
-
-/** Módulo 11: devuelve el dígito esperado, o `null` si el resultado es 10 (imposible). */
-function modulo11(digitos: number[], coeficientes: number[]): number | null {
-  const resto = sumaPonderada(digitos, coeficientes) % 11;
-  const digito = resto === 0 ? 0 : 11 - resto;
-  return digito === 10 ? null : digito;
-}
+export const COEF_PRIVADA = [4, 3, 2, 7, 6, 5, 4, 3, 2];
+export const COEF_PUBLICA = [3, 2, 7, 6, 5, 4, 3, 2];
 
 function tipoDeRuc(tercerDigito: number): TipoRuc | null {
   if (tercerDigito <= 5) return "natural";

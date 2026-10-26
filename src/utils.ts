@@ -11,3 +11,10 @@ export function aDigitos(valor: string): number[] {
 export function sumaPonderada(digitos: number[], coeficientes: number[]): number {
   return coeficientes.reduce((suma, coef, i) => suma + digitos[i] * coef, 0);
 }
+
+/** Módulo 11: devuelve el dígito esperado, o `null` si el resultado es 10 (imposible). */
+export function modulo11(digitos: number[], coeficientes: number[]): number | null {
+  const resto = sumaPonderada(digitos, coeficientes) % 11;
+  const digito = resto === 0 ? 0 : 11 - resto;
+  return digito === 10 ? null : digito;
+}
