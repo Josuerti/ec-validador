@@ -1,0 +1,51 @@
+{
+  "name": "ec-validador",
+  "version": "0.1.0",
+  "description": "Valida cédulas y RUC de Ecuador (persona natural, sociedad privada y entidad pública).",
+  "keywords": [
+    "ecuador",
+    "cedula",
+    "ruc",
+    "sri",
+    "validacion",
+    "validator"
+  ],
+  "author": "Alberto Inga",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Josuerti/ec-validador.git"
+  },
+  "homepage": "https://github.com/Josuerti/ec-validador#readme",
+  "bugs": {
+    "url": "https://github.com/Josuerti/ec-validador/issues"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
+  },
+  "devDependencies": {
+    "tsup": "^9.0.0",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.5"
+  }
+}
